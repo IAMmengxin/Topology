@@ -27,9 +27,10 @@ export default class Node{
 }
 class Style extends BaseStyle{
     lineWidth;
-    constructor(lineWidth = 1,baseStyle) {
+    constructor(lineWidth = 1,radius = 0,baseStyle) {
         super(baseStyle.fill,baseStyle.stroke,baseStyle.active,baseStyle.selected,
             baseStyle.highlight,baseStyle.inactive,baseStyle.disable);
         this.lineWidth = lineWidth;
+        this.radius = radius;
     }
 }
