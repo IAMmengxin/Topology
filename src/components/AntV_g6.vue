@@ -1,6 +1,6 @@
 <template>
   <div id="mountNode" ref="mountNode"></div>
-  <div class="menu">
+  <div class="menu" ref="menuRef">
     <div class="center">
       <div class="rect" draggable="true"
            @mousedown="rectMouseDown"
@@ -19,13 +19,18 @@ import {AnimationCustom} from "@/assets/struct/Function/AnimationCustom";
 import config from "@/assets/Data/Config";
 import GraphCustom from "@/assets/struct/Tool/GraphCustom";
 import Vector2 from "@/assets/struct/Tool/Vector2";
+import NodeManager from "@/assets/struct/Function/NodeManager";
+import NodeConstruct from "@/assets/struct/G6Construct/NodeConstruct";
+import Config from "@/assets/Data/Config";
 
+const menuRef = ref(null);
 const showMove = ref(false);
 // const rectMoveRef = ref(null);
 const mountNode = ref(null);
 onMounted(() => {
   console.log("G6版本:", G6.Global.version)
   GraphCustom.Instance.createGraph(mountNode);
+  NodeManager.setMenuWidth(menuRef.value.offsetWidth);
 })
 const Zero = Vector2.Zero;
 // let startMousePosition = Zero;
@@ -54,6 +59,8 @@ function dragEnd(e) {
     // rectMoveRef.value.style.left = rectDragPosition.x + 'px';
     // rectMoveRef.value.style.top = rectDragPosition.y + 'px';
   rectDragPosition = new Vector2(e.offsetX,e.offsetY);
+  NodeManager.addNode(new NodeConstruct(NodeManager.getRandomId(),"newName",rectDragPosition.x,rectDragPosition.y,
+  [30,30],Config.NodeBuildInType.rect));
 }
 </script>
 <style scoped>
@@ -65,7 +72,7 @@ function dragEnd(e) {
 }
 
 .menu {
-  background-color: gray;
+  background-color: #f7f9fb;
   width: 10vw;
   height: 100vh;
   display: flex;
@@ -76,12 +83,15 @@ function dragEnd(e) {
   margin-top: 10px;
   width: 150px;
   height: 20px;
-  border: black solid 1px;
+  //border: black solid 1px;
   text-align: center;
+  background-color: #cccfd0;
 }
 
 .rect:hover {
   cursor: move;
+  background: white;
+  border: 1px solid #ced4d9;
 }
 
 .move {

@@ -1,14 +1,14 @@
 import G6 from "@antv/g6";
-import data from "@/assets/Data/AntVData";
+import AntVData from "@/assets/Data/AntVData";
 import {AnimationCustom} from "@/assets/struct/Function/AnimationCustom";
 import config from "@/assets/Data/Config";
 
 let GraphCustomIns = null;
 let lastSelectNode = null;
 export default class GraphCustom{
-    graph;
+    _graph;
     constructor() {
-        this.graph = null;
+        this._graph = null;
     }
     static get Instance(){
         if(GraphCustomIns===null){
@@ -16,13 +16,16 @@ export default class GraphCustom{
         }
         return GraphCustomIns;
     }
+    get graph(){
+        return this._graph;
+    }
     createGraph(mountNode){
         // 创建 G6 图实例
         const graph = new G6.Graph({
             container: mountNode.value, // 指定图画布的容器 id，与第 9 行的容器对应
             // 画布宽高
-            width: window.innerWidth-window.innerWidth/10,
-            height: window.innerHeight,
+            width: Math.floor(window.innerWidth-window.innerWidth/10),
+            height: window.innerHeight-4,
             modes: {
                 // default:['drag-canvas', 'zoom-canvas', 'drag-node']
                 default: ['zoom-canvas'],
@@ -30,23 +33,28 @@ export default class GraphCustom{
             }
         });
         graph.setMode('edit')
-        this.graph = graph;
-        graph.on("node:click", (ev) => {
-            console.log("点击的Node：", ev.item._cfg);
-            const edge = ev.item;
-            graph.setItemState(edge,'selected',!edge.hasState('selected'))
-            if(lastSelectNode!==edge){
-                if(lastSelectNode!==null){
-                    graph.setItemState(lastSelectNode,'selected',false)
-                }
-                lastSelectNode = edge;
-            }
-        })
+        this._graph = graph;
+        // graph.on("node:click", (ev) => {
+        //     console.log("点击的Node：", ev.item);
+        //     const edge = ev.item;
+        //     graph.setItemState(edge,'selected',!edge.hasState('selected'))
+        //     if(lastSelectNode!==edge){
+        //         if(lastSelectNode!==null){
+        //             graph.setItemState(lastSelectNode,'selected',false)
+        //         }
+        //         lastSelectNode = edge;
+        //     }
+        // })
         graph.on("combo:click", (ev) => {
             console.log("点击的组件:", ev)
         })
         graph.on("edge:click", (ev) => {
             console.log("点击的边:", ev)
+        })
+        graph.on('node:mouseenter',(e)=>{
+            const node = e.item;
+            graph.setItemState(node,'hover',true);
+            graph.paint();
         })
         graph.on('edge:mouseenter',(ev)=>{
             const edge = ev.item;
@@ -57,12 +65,12 @@ export default class GraphCustom{
         })
         // graph.setMode('edit');
 // 读取数据
-        graph.data(data);
+        graph.data(AntVData);
 // 渲染图
         graph.render();
-        AnimationCustom.EdgeAnim(config.animEdge[0]).addFlowAnim();
-        AnimationCustom.EdgeAnim(config.animEdge[1]).addFlowAnim();
-        AnimationCustom.EdgeAnim(config.animEdge[2]).addLineAnim();
-        AnimationCustom.EdgeAnim(config.animEdge[3]).addPolyline();
+        AnimationCustom.EdgeAnim(config.AnimEdge[0]).addFlowAnim();
+        AnimationCustom.EdgeAnim(config.AnimEdge[1]).addFlowAnim();
+        AnimationCustom.EdgeAnim(config.AnimEdge[2]).addLineAnim();
+        AnimationCustom.EdgeAnim(config.AnimEdge[3]).addPolyline();
     }
 }

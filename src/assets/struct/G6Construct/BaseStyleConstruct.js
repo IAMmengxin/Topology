@@ -1,14 +1,34 @@
-export default class BaseStyle {
+export default class BaseStyleConstruct {
+    //填充颜色,type:rgba or string(#ffffff)
     fill;
+    //描边颜色,type:rgba or string(#ffffff)
     stroke;
+    //激活时的样式,type:BaseStyleConstruct
     active;
+    //选中时的样式,type:BaseStyleConstruct
     selected;
+    //高亮时的样式,type:BaseStyleConstruct
     highlight;
+    //进入激活状态时的样式,type:BaseStyleConstruct
     inactive;
+    //disable状态时的样式,type:BaseStyleConstruct
     disable;
+    //阴影颜色,type:rgba or string(#ffffff)
     shadowColor;
+    //阴影模糊程度,type:number
     shadowBlur;
 
+    /*
+    * @param {string} stroke 描边颜色,type:rgba or string(#ffffff)
+    * @param {string} fill 填充颜色,type:rgba or string(#ffffff)
+    * @param {BaseStyleConstruct} active 激活时的样式,type:BaseStyleConstruct
+    * @param {BaseStyleConstruct} selected 选中时的样式,type:BaseStyleConstruct
+    * @param {BaseStyleConstruct} highlight 高亮时的样式,type:BaseStyleConstruct
+    * @param {BaseStyleConstruct} inactive 进入激活状态时的样式,type:BaseStyleConstruct
+    * @param {BaseStyleConstruct} disable disable状态时的样式,type:BaseStyleConstruct
+    * @param {string} shadowColor 阴影颜色,type:rgba or string(#ffffff)
+    * @param {number} shadowBlur 阴影模糊程度,type:number
+    * */
     constructor(stroke = 'black', fill = null, active = null,
                 selected = null, highlight = null, inactive = null,
                 disable = null,shadowColor = null,shadowBlur = 0) {
