@@ -348,5 +348,11 @@ const data = {
             }
         },
     ],
+    combos:[
+        /*{
+            id: 'combo',
+            label: 'Combo',
+        }*/
+    ]
 };
 export default data;

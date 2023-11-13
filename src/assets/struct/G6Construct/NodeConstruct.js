@@ -23,6 +23,8 @@ export default class NodeConstruct {
     labelCfg;
     //节点样式
     style;
+    //所属组件id
+    comboId;
 
     /*
     * @param {string} id 节点id,type:string
@@ -34,11 +36,11 @@ export default class NodeConstruct {
     * @param {LabelCfgConstruct} labelCfg 文字样式,type:LabelCfgConstruct
     * @param {Array<Array<number>>} anchorPoints 节点锚点,type:Array<Array<number>>
     * @param {Style} style 节点样式,type:Style
-    * @param {string} style 节点样式,type:string
+    * @param {string} comboId 所属组件id,type:string
     * */
     constructor(id, name, x, y, size, type, label = null, labelCfg = new LabelCfgConstruct(),
                 anchorPoints = Config.AnchorPoints, style = new Style(new BaseStyleConstruct()),
-                comboId) {
+                comboId = null) {
         this.id = id;
         this.name = name;
         this.x = x;
@@ -49,6 +51,7 @@ export default class NodeConstruct {
         this.anchorPoints = anchorPoints;
         this.labelCfg = labelCfg;
         this.style = style;
+        this.comboId = comboId;
     }
 }
 

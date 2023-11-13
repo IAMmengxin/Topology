@@ -26,6 +26,8 @@ export default class GraphCustom{
             // 画布宽高
             width: Math.floor(window.innerWidth-window.innerWidth/10),
             height: window.innerHeight-4,
+            //启用combos时需要将groupByTypes设为false以获得正确的zIndex
+            groupByTypes: false,
             modes: {
                 // default:['drag-canvas', 'zoom-canvas', 'drag-node']
                 default: ['zoom-canvas'],
