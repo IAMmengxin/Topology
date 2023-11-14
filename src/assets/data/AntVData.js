@@ -1,5 +1,5 @@
 import {Arrow} from "@antv/g6";
-import config from "@/assets/Data/Config";
+import Config from "@/assets/data/Config";
 
 const data = {
     // 点集
@@ -18,7 +18,7 @@ const data = {
             y: 100, // 节点纵坐标
             // label: '起始点', // 节点文本
             size: [30, 10],
-            anchorPoints: config.AnchorPoints,
+            anchorPoints: Config.AnchorPoints,
             type: 'rect',
             // color: 'red',
             labelCfg: {
@@ -40,7 +40,7 @@ const data = {
             y: 185, // 节点纵坐标
             label: '油箱', // 节点文本
             size: [120, 160],
-            anchorPoints: config.AnchorPoints,
+            anchorPoints: Config.AnchorPoints,
             labelCfg: {
                 position:'bottom',
                 offset: 5,
@@ -62,7 +62,7 @@ const data = {
             x: 120, // 节点横坐标
             y: 110, // 节点纵坐标
             // label: '起始点', // 节点文本
-            anchorPoints: config.AnchorPoints,
+            anchorPoints: Config.AnchorPoints,
             size: [120, 10],
             type: 'rect',
             style: {
@@ -77,7 +77,7 @@ const data = {
             x: 120, // 节点横坐标
             y: 120, // 节点纵坐标
             // label: '起始点', // 节点文本
-            anchorPoints: config.AnchorPoints,
+            anchorPoints: Config.AnchorPoints,
             size: [120, 10],
             type: 'rect',
             style: {
@@ -92,7 +92,7 @@ const data = {
             x: 120, // 节点横坐标
             y: 130, // 节点纵坐标
             // label: '起始点', // 节点文本
-            anchorPoints: config.AnchorPoints,
+            anchorPoints: Config.AnchorPoints,
             size: [120, 10],
             type: 'rect',
             style: {
@@ -107,7 +107,7 @@ const data = {
             x: 120, // 节点横坐标
             y: 225, // 节点纵坐标
             // label: '起始点', // 节点文本
-            anchorPoints: config.AnchorPoints,
+            anchorPoints: Config.AnchorPoints,
             size: [120, 10],
             type: 'rect',
             style: {
@@ -122,7 +122,7 @@ const data = {
             x: 120, // 节点横坐标
             y: 245, // 节点纵坐标
             // label: '起始点', // 节点文本
-            anchorPoints: config.AnchorPoints,
+            anchorPoints: Config.AnchorPoints,
             size: [120, 10],
             type: 'rect',
             style: {
@@ -136,7 +136,7 @@ const data = {
             "id": "l0_t0_oliBox_in_t0",
             "x": 144,
             "y": 122,
-            anchorPoints: config.AnchorPoints,
+            anchorPoints: Config.AnchorPoints,
             "size": [
                 1,
                 15
@@ -151,7 +151,7 @@ const data = {
             "id": "l0_t0_oliBox_in_t1",
             "x": 144,
             "y": 142,
-            anchorPoints: config.AnchorPoints,
+            anchorPoints: Config.AnchorPoints,
             "size": [
                 8,
                 25
@@ -166,7 +166,7 @@ const data = {
             "id": "l0_t0_oliBox_in_t2",
             "x": 144,
             "y": 160,
-            anchorPoints: config.AnchorPoints,
+            anchorPoints: Config.AnchorPoints,
             "size": [
                 1,
                 10
@@ -181,7 +181,7 @@ const data = {
             "id": "l0_t0_oliBox_in_t3",
             "x": 144,
             "y": 178,
-            anchorPoints: config.AnchorPoints,
+            anchorPoints: Config.AnchorPoints,
             "size": [
                 8,
                 25
@@ -196,7 +196,7 @@ const data = {
             id: 'l0_t0_oliBox_in_t4', // 节点的唯一标识
             x: 90, // 节点横坐标
             y: 230, // 节点纵坐标
-            anchorPoints: config.AnchorPoints,
+            anchorPoints: Config.AnchorPoints,
             // label: '起始点', // 节点文本
             size: 30,
             type: 'image',
@@ -214,7 +214,7 @@ const data = {
             y: 163, // 节点纵坐标
             label: '油冷器', // 节点文本
             size: [40, 30],
-            anchorPoints: config.AnchorPoints,
+            anchorPoints: Config.AnchorPoints,
             type: 'rect',
             style: {
                 // backgroundColor: 'red',
@@ -229,7 +229,7 @@ const data = {
             y: 163, // 节点纵坐标
             label: '油冷器', // 节点文本
             size: [40, 30],
-            anchorPoints: config.AnchorPoints,
+            anchorPoints: Config.AnchorPoints,
             type: 'rect',
             style: {
                 // backgroundColor: 'red',
@@ -245,7 +245,7 @@ const data = {
             // label: '阀门', // 节点文本
             img: 'valve.png',
             size: [10, 25],
-            anchorPoints: config.AnchorPoints,
+            anchorPoints: Config.AnchorPoints,
             type: 'image',
             style: {
                 // backgroundColor: 'red',
@@ -283,7 +283,7 @@ const data = {
             type: 'polyline0',
             id:'目标id',
             name:'目标name',
-            sourceAnchor: config.AnchorDirect.topMiddle,
+            sourceAnchor: Config.AnchorDirect.topMiddle,
             // label: '我是连线', // 边的文本
             style: {
                 radius: 2,
@@ -300,8 +300,8 @@ const data = {
             source: '油冷器0', // 起始点 id
             target: '阀门0', // 目标点 id
             type: 'polyline1',
-            sourceAnchor: config.AnchorDirect.leftMiddle,
-            targetAnchor: config.AnchorDirect.topMiddle,
+            sourceAnchor: Config.AnchorDirect.leftMiddle,
+            targetAnchor: Config.AnchorDirect.topMiddle,
             // label: '我是连线', // 边的文本
             style: {
                 radius: 2,
@@ -314,7 +314,8 @@ const data = {
             source: '油冷器1', // 起始点 id
             target: 'l0_t0_oliBox_t2', // 目标点 id
             type: 'polyline2',
-            sourceAnchor: config.AnchorDirect.topMiddle,
+            sourceAnchor: Config.AnchorDirect.topMiddle,
+            targetAnchor: Config.AnchorDirect.rightMiddle,
             // label: '我是连线', // 边的文本
             style: {
                 radius: 2,
@@ -332,8 +333,8 @@ const data = {
             source: '油冷器1', // 起始点 id
             target: '阀门0', // 目标点 id
             type: 'polyline3',
-            sourceAnchor: config.AnchorDirect.bottomMiddle,
-            targetAnchor: config.AnchorDirect.rightMiddle,
+            sourceAnchor: Config.AnchorDirect.bottomMiddle,
+            targetAnchor: Config.AnchorDirect.rightMiddle,
             // label: '我是连线', // 边的文本
             style: {
                 radius: 2,

@@ -1,6 +1,6 @@
-import BaseStyleConstruct from "@/assets/struct/G6Construct/BaseStyleConstruct";
-import Config from "@/assets/Data/Config";
-import LabelCfgConstruct from "@/assets/struct/G6Construct/LabelCfgConstruct";
+import BaseStyleConstruct from "@/assets/struct/g6-construct/BaseStyleConstruct";
+import Config from "@/assets/data/Config";
+import LabelCfgConstruct from "@/assets/struct/g6-construct/LabelCfgConstruct";
 
 export default class NodeConstruct {
     //节点id
@@ -26,23 +26,24 @@ export default class NodeConstruct {
     //所属组件id
     comboId;
 
+
     /*
     * @param {string} id 节点id,type:string
     * @param {string} name 节点名称,type:string
     * @param {number} x 节点横坐标,type:number
     * @param {number} y 节点纵坐标,type:number
-    * @param {Array<number>} size 节点尺寸,type:Array<number>
+    * @param {Array<Number>} size 节点尺寸,type:Array<Number>
     * @param {string} label 文字内容,type:string
     * @param {LabelCfgConstruct} labelCfg 文字样式,type:LabelCfgConstruct
-    * @param {Array<Array<number>>} anchorPoints 节点锚点,type:Array<Array<number>>
+    * @param {Array<Array<Number>>} anchorPoints 节点锚点,type:Array<Array<Number>>
     * @param {Style} style 节点样式,type:Style
     * @param {string} comboId 所属组件id,type:string
     * */
-    constructor(id, name, x, y, size, type, label = null, labelCfg = new LabelCfgConstruct(),
+    constructor(id, x, y, size, type, name = null, label = null, labelCfg = new LabelCfgConstruct(),
                 anchorPoints = Config.AnchorPoints, style = new Style(new BaseStyleConstruct()),
                 comboId = null) {
         this.id = id;
-        this.name = name;
+        this.name = name === null ? id : name;
         this.x = x;
         this.y = y;
         this.label = label;
@@ -66,8 +67,8 @@ class Style extends BaseStyleConstruct {
     * @param {number} radius 半径,type:number
     * @param {BaseStyleConstruct} baseStyle 半径,type:BaseStyleConstruct
     * */
-    constructor(baseStyle,lineWidth = 1, radius = 0) {
-        super(baseStyle.fill, baseStyle.stroke, baseStyle.active, baseStyle.selected,
+    constructor(baseStyle, lineWidth = 1, radius = 0) {
+        super(baseStyle.stroke, baseStyle.fill, baseStyle.active, baseStyle.selected,
             baseStyle.highlight, baseStyle.inactive, baseStyle.disable);
         this.lineWidth = lineWidth;
         this.radius = radius;

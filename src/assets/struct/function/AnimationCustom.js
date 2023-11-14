@@ -1,5 +1,5 @@
 import {Graph, registerBehavior, registerEdge, registerNode} from "@antv/g6";
-import GraphCustom from "@/assets/struct/Tool/GraphCustom";
+import GraphCustom from "@/assets/struct/tool/GraphCustom";
 
 let EdgeInstance = {};
 let NodeInstance = {};

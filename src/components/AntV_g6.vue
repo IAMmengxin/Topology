@@ -13,15 +13,11 @@
 
 <script setup>
 import G6, {registerNode, registerEdge} from "@antv/g6";
-import data from "@/assets/Data/AntVdata";
 import {onMounted, ref} from "vue";
-import {AnimationCustom} from "@/assets/struct/Function/AnimationCustom";
-import config from "@/assets/Data/Config";
-import GraphCustom from "@/assets/struct/Tool/GraphCustom";
-import Vector2 from "@/assets/struct/Tool/Vector2";
-import NodeManager from "@/assets/struct/Function/NodeManager";
-import NodeConstruct from "@/assets/struct/G6Construct/NodeConstruct";
-import Config from "@/assets/Data/Config";
+import GraphCustom from "@/assets/struct/tool/GraphCustom";
+import Vector2 from "@/assets/struct/tool/Vector2";
+import G6Manager from "@/assets/struct/function/G6Manager";
+import RectGroup from "@/assets/struct/group-node/RectGroup";
 
 const menuRef = ref(null);
 const showMove = ref(false);
@@ -30,7 +26,7 @@ const mountNode = ref(null);
 onMounted(() => {
   console.log("G6版本:", G6.Global.version)
   GraphCustom.Instance.createGraph(mountNode);
-  NodeManager.setMenuWidth(menuRef.value.offsetWidth);
+  G6Manager.setMenuWidth(menuRef.value.offsetWidth);
 })
 const Zero = Vector2.Zero;
 // let startMousePosition = Zero;
@@ -59,8 +55,9 @@ function dragEnd(e) {
     // rectMoveRef.value.style.left = rectDragPosition.x + 'px';
     // rectMoveRef.value.style.top = rectDragPosition.y + 'px';
   rectDragPosition = new Vector2(e.offsetX,e.offsetY);
-  NodeManager.addNode(new NodeConstruct(NodeManager.getRandomId(),"newName",rectDragPosition.x,rectDragPosition.y,
-  [30,30],Config.NodeBuildInType.rect));
+  // G6Manager.addNode(new NodeConstruct(G6Manager.getRandomId(),"newName",rectDragPosition.x,rectDragPosition.y,
+  // [30,30],Config.NodeBuildInType.rect));
+  RectGroup.addRectComb(rectDragPosition.x,rectDragPosition.y,[80,30])
 }
 </script>
 <style scoped>

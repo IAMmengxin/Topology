@@ -1,4 +1,4 @@
-import BaseStyleConstruct from "@/assets/struct/G6Construct/BaseStyleConstruct";
+import BaseStyleConstruct from "@/assets/struct/g6-construct/BaseStyleConstruct";
 
 export default class LabelCfgConstruct {
     //文字样式

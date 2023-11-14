@@ -17,6 +17,14 @@ export default class BaseStyleConstruct {
     shadowColor;
     //阴影模糊程度,type:number
     shadowBlur;
+    //描边虚线
+    lineDash;
+    //设置绘图的当前 alpha 或透明值
+    opacity;
+    //设置填充的 alpha 或透明值
+    fillOpacity;
+    //鼠标在该节点上时的鼠标样式，CSS 的 cursor 选项都支持
+    cursor;
 
     /*
     * @param {string} stroke 描边颜色,type:rgba or string(#ffffff)
@@ -28,10 +36,16 @@ export default class BaseStyleConstruct {
     * @param {BaseStyleConstruct} disable disable状态时的样式,type:BaseStyleConstruct
     * @param {string} shadowColor 阴影颜色,type:rgba or string(#ffffff)
     * @param {number} shadowBlur 阴影模糊程度,type:number
+    * @param {number} lineDash Number[]类型代表实、虚长度,type:number[]
+    * @param {number} opacity 设置绘图的当前 alpha 或透明值,type:number
+    * @param {number} fillOpacity 设置填充的 alpha 或透明值,type:number
+    * @param {string} cursor 鼠标在该节点上时的鼠标样式，CSS 的 cursor 选项都支持,type:string
     * */
-    constructor(stroke = 'black', fill = null, active = null,
+    constructor(stroke = 'black', fill = 'rgba(0,0,0,0)', active = null,
                 selected = null, highlight = null, inactive = null,
-                disable = null,shadowColor = null,shadowBlur = 0) {
+                disable = null, shadowColor = null, shadowBlur = 0,
+                lineDash = null,opacity = 1,fillOpacity = 1,
+                cursor = 'default') {
         this.stroke = stroke;
         this.fill = fill;
         this.active = active;
@@ -41,6 +55,10 @@ export default class BaseStyleConstruct {
         this.disable = disable;
         this.shadowColor = shadowColor;
         this.shadowBlur = shadowBlur;
+        this.lineDash = lineDash;
+        this.opacity = 1;
+        this.fillOpacity = 1;
+        this.cursor = cursor;
     }
 
     ss() {
@@ -53,8 +71,7 @@ export default class BaseStyleConstruct {
                 40,
                 30
             ],
-            "anchorPoints": [
-            ],
+            "anchorPoints": [],
             "type": "rect",
             "style": {
                 "active": {

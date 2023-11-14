@@ -1,4 +1,4 @@
-const config = {
+const Config = {
     AnchorPoints: [
         [0, 0],     //左上
         [0, 0.5],   //左侧中间
@@ -17,7 +17,7 @@ const config = {
         rightBottom: 4, //右下
         rightMiddle: 5, //右侧中间
         rightTop: 6,    //右上
-        topMiddle: 2,   //上侧中间
+        topMiddle: 7,   //上侧中间
     },
     LabelPosition: {
         center: 'center',
@@ -39,8 +39,26 @@ const config = {
         //甜甜圈
         donut: 'donut'
     },
+    //添加组时可选定的类型
+    GroupShapeType:{
+        rect:'rect',//矩形
+        circle: 'circle',//圆
+        fan: 'fan',//扇形
+        ellipse: 'ellipse',//椭圆
+        marker: 'marker',//标记
+        image: 'image',//图片
+        polygon: 'polygon',//多边形
+        path:'path',//路径
+        text: 'text',//文本
+    },
+    //内嵌的shape的类型（按功能区分）
+    ShapeType:{
+        connector: 0,
+        scale: 1
+    },
     //自定义节点类型
     NodeCustomType: {},
     AnimEdge: ["polyline0", "polyline1", "polyline2", "polyline3"],
+    AnchorColor: '#6ab7ff'
 }
-export default config;
+export default Config;
