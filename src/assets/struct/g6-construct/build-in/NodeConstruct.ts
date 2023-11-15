@@ -1,30 +1,31 @@
-import BaseStyleConstruct from "@/assets/struct/g6-construct/BaseStyleConstruct";
-import Config from "@/assets/data/Config";
-import LabelCfgConstruct from "@/assets/struct/g6-construct/LabelCfgConstruct";
+import Config, {NodeBuildInType} from "../../../data/Config";
+import BaseStyleConstruct from "../BaseStyleConstruct";
+import LabelCfgConstruct from "../LabelCfgConstruct";
+import BaseConstruct from "./BaseConstruct";
 
-export default class NodeConstruct {
+export default class NodeConstruct extends BaseConstruct{
     //节点id
-    id;
+    id: string;
     //节点名称
-    name;
+    name: string;
     //节点横坐标
-    x;
+    x: number;
     //纵坐标
-    y;
+    y: number;
     //文字内容
-    label;
+    label: string;
     //节点尺寸
-    size;
+    size: Array<number>;
     //节点锚点
-    anchorPoints;
+    anchorPoints: Array<Array<number>>;
     //节点类型
-    type;
+    type: NodeBuildInType;
     //文字样式
-    labelCfg;
+    labelCfg: LabelCfgConstruct;
     //节点样式
-    style;
+    style: Style;
     //所属组件id
-    comboId;
+    comboId: string;
 
 
     /*
@@ -39,18 +40,15 @@ export default class NodeConstruct {
     * @param {Style} style 节点样式,type:Style
     * @param {string} comboId 所属组件id,type:string
     * */
-    constructor(id, x, y, size, type, name = null, label = null, labelCfg = new LabelCfgConstruct(),
-                anchorPoints = Config.AnchorPoints, style = new Style(new BaseStyleConstruct()),
-                comboId = null) {
-        this.id = id;
-        this.name = name === null ? id : name;
+    constructor(id: string, x: number, y: number, size: Array<number>, type: NodeBuildInType, name: string = null,
+                label: string = null, labelCfg: LabelCfgConstruct = new LabelCfgConstruct(),
+                anchorPoints: number[][] = Config.AnchorPoints, style: Style = new Style(new BaseStyleConstruct()),
+                comboId: string = null) {
+        super(id, name, size, label,labelCfg);
         this.x = x;
         this.y = y;
-        this.label = label;
-        this.size = size;
         this.type = type;
         this.anchorPoints = anchorPoints;
-        this.labelCfg = labelCfg;
         this.style = style;
         this.comboId = comboId;
     }
@@ -58,16 +56,16 @@ export default class NodeConstruct {
 
 class Style extends BaseStyleConstruct {
     //线宽
-    lineWidth;
+    lineWidth: number;
     //半径
-    radius;
+    radius: number;
 
     /*
     * @param {number} lineWidth 线宽,type:number
     * @param {number} radius 半径,type:number
     * @param {BaseStyleConstruct} baseStyle 半径,type:BaseStyleConstruct
     * */
-    constructor(baseStyle, lineWidth = 1, radius = 0) {
+    constructor(baseStyle: BaseStyleConstruct, lineWidth: number = 1, radius: number = 0) {
         super(baseStyle.stroke, baseStyle.fill, baseStyle.active, baseStyle.selected,
             baseStyle.highlight, baseStyle.inactive, baseStyle.disable);
         this.lineWidth = lineWidth;

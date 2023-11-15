@@ -1,30 +1,30 @@
 export default class BaseStyleConstruct {
     //填充颜色,type:rgba or string(#ffffff)
-    fill;
+    fill:string;
     //描边颜色,type:rgba or string(#ffffff)
-    stroke;
+    stroke:string;
     //激活时的样式,type:BaseStyleConstruct
-    active;
+    active:BaseStyleConstruct;
     //选中时的样式,type:BaseStyleConstruct
-    selected;
+    selected:BaseStyleConstruct;
     //高亮时的样式,type:BaseStyleConstruct
-    highlight;
+    highlight:BaseStyleConstruct;
     //进入激活状态时的样式,type:BaseStyleConstruct
-    inactive;
+    inactive:BaseStyleConstruct;
     //disable状态时的样式,type:BaseStyleConstruct
-    disable;
+    disable:BaseStyleConstruct;
     //阴影颜色,type:rgba or string(#ffffff)
-    shadowColor;
+    shadowColor:string;
     //阴影模糊程度,type:number
-    shadowBlur;
+    shadowBlur:number;
     //描边虚线
-    lineDash;
+    lineDash:Array<Number>;
     //设置绘图的当前 alpha 或透明值
-    opacity;
+    opacity:number;
     //设置填充的 alpha 或透明值
-    fillOpacity;
+    fillOpacity:number;
     //鼠标在该节点上时的鼠标样式，CSS 的 cursor 选项都支持
-    cursor;
+    cursor:string;
 
     /*
     * @param {string} stroke 描边颜色,type:rgba or string(#ffffff)
@@ -41,11 +41,12 @@ export default class BaseStyleConstruct {
     * @param {number} fillOpacity 设置填充的 alpha 或透明值,type:number
     * @param {string} cursor 鼠标在该节点上时的鼠标样式，CSS 的 cursor 选项都支持,type:string
     * */
-    constructor(stroke = 'black', fill = 'rgba(0,0,0,0)', active = null,
-                selected = null, highlight = null, inactive = null,
-                disable = null, shadowColor = null, shadowBlur = 0,
-                lineDash = null,opacity = 1,fillOpacity = 1,
-                cursor = 'default') {
+    constructor(stroke:string = 'black', fill:string = 'rgba(0,0,0,0)', active:BaseStyleConstruct = null,
+                selected:BaseStyleConstruct = null, highlight:BaseStyleConstruct = null,
+                inactive:BaseStyleConstruct = null, disable:BaseStyleConstruct = null,
+                shadowColor:string = null, shadowBlur:number = 0,
+                lineDash:number[] = null,opacity:number = 1,fillOpacity:number = 1,
+                cursor:string = 'default') {
         this.stroke = stroke;
         this.fill = fill;
         this.active = active;

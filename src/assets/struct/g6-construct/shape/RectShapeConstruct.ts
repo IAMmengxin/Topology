@@ -1,22 +1,22 @@
-import NodeConstruct from "@/assets/struct/g6-construct/build-in/NodeConstruct";
-import Config from "@/assets/data/Config";
-import BaseStyleConstruct from "@/assets/struct/g6-construct/BaseStyleConstruct";
+import BaseStyleConstruct from "../BaseStyleConstruct";
+import BaseConstruct from "./BaseConstruct";
+import {GroupShapeType} from "../../../data/Config";
 
-export default class RectShapeConstruct {
+
+export default class RectShapeConstruct extends BaseConstruct{
     //矩形的宽度
-    width;
+    width:number;
     //矩形的高度
-    height;
+    height:number;
     //定义圆角,支持整数或数组形式， 分别对应左上、右上、右下、左下角的半径：
     // - radius 缩写为 1 或 [ 1 ] 相当于 [ 1, 1, 1, 1 ]
     // - radius 缩写为 [ 1, 2 ] 相当于 [ 1, 2, 1, 2 ]
     // - radius 缩写为 [ 1, 2, 3 ] 相当于 [ 1, 2, 3, 2 ]
-    radius;
-    style;
-    constructor(id,x,y,width,height,radius) {
+    radius:number[];
+    style:BaseStyleConstruct;
+    constructor(id:string,size,x:number,y:number,width:number,height:number,radius:number[]) {
+        super(id,size,x,y, GroupShapeType.rect);
         this.style = new BaseStyleConstruct();
-        this.x = x;
-        this.y = y;
         this.width = width;
         this.height = height;
         this.radius = radius;

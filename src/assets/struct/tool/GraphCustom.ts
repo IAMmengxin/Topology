@@ -1,25 +1,25 @@
-import G6 from "@antv/g6";
-import AntVData from "@/assets/data/AntVData";
-import {AnimationCustom} from "@/assets/struct/function/AnimationCustom";
-import Config from "@/assets/data/Config";
+import G6, {Graph} from "@antv/g6";
+import AntVData from "../../data/AntVData";
+import {AnimationCustom} from "../function/AnimationCustom";
+import Config, {Modes} from "../../data/Config";
 
-let GraphCustomIns = null;
-let lastSelectNode = null;
+let GraphCustomIns:GraphCustom = null;
+let lastSelectNode:any = null;
 export default class GraphCustom {
-    _graph;
+    _graph:Graph;
 
     constructor() {
         this._graph = null;
     }
 
-    static get Instance() {
+    static get Instance():GraphCustom {
         if (GraphCustomIns === null) {
             GraphCustomIns = new GraphCustom();
         }
         return GraphCustomIns;
     }
 
-    get graph() {
+    get graph():Graph {
         return this._graph;
     }
 
@@ -35,7 +35,12 @@ export default class GraphCustom {
             modes: {
                 // default:['drag-canvas', 'zoom-canvas', 'drag-node']
                 default: ['zoom-canvas'],
-                edit: ['drag-node', 'click-select']
+                edit: ['drag-node', 'click-select',
+                    {
+                        type: Modes.createEdge,
+                        trigger: 'click'
+                    }
+                ]
             }
         });
         graph.setMode('edit')
@@ -59,8 +64,11 @@ export default class GraphCustom {
         })
         graph.on('node:mouseenter', (e) => {
             const node = e.item;
-            graph.setItemState(node, 'hover', true);
+            graph.setItemState(node, 'active', true);
             graph.paint();
+        })
+        graph.on('node:mouseleave',(e)=>{
+            graph.setItemState(e.item,'active',false);
         })
         graph.on('edge:mouseenter', (ev) => {
             const edge = ev.item;
@@ -73,10 +81,10 @@ export default class GraphCustom {
 // 读取数据
         graph.data(AntVData);
 // 渲染图
-        graph.render();
         AnimationCustom.EdgeAnim(Config.AnimEdge[0]).addFlowAnim();
         AnimationCustom.EdgeAnim(Config.AnimEdge[1]).addFlowAnim();
         AnimationCustom.EdgeAnim(Config.AnimEdge[2]).addLineAnim();
         AnimationCustom.EdgeAnim(Config.AnimEdge[3]).addPolyline();
+        graph.render();
     }
 }

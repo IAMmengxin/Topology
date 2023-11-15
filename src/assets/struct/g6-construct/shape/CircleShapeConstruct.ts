@@ -1,13 +1,13 @@
-import NodeConstruct from "@/assets/struct/g6-construct/build-in/NodeConstruct";
-import Config from "@/assets/data/Config";
+import NodeConstruct from "../build-in/NodeConstruct";
+import Config from "../../../data/Config";
 
 export default class CircleShapeConstruct extends NodeConstruct {
     //圆的半径
-    r;
+    r:number;
     /*
     * @param {number} r 圆的半径
     * */
-    constructor(id, x, y, r) {
+    constructor(id:string, x:number, y:number, r:number) {
         super(id, x, y, undefined, Config.GroupShapeType.circle);
         this.r = r;
     }
