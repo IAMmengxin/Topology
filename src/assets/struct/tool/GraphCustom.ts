@@ -2,24 +2,25 @@ import G6, {Graph} from "@antv/g6";
 import AntVData from "../../data/AntVData";
 import {AnimationCustom} from "../function/AnimationCustom";
 import Config, {Modes} from "../../data/Config";
+import BehaviorManage from "../../editor/behavior/BehaviorManage";
 
-let GraphCustomIns:GraphCustom = null;
-let lastSelectNode:any = null;
+let GraphCustomIns: GraphCustom = null;
+let lastSelectNode: any = null;
 export default class GraphCustom {
-    _graph:Graph;
+    _graph: Graph;
 
     constructor() {
         this._graph = null;
     }
 
-    static get Instance():GraphCustom {
+    static get Instance(): GraphCustom {
         if (GraphCustomIns === null) {
             GraphCustomIns = new GraphCustom();
         }
         return GraphCustomIns;
     }
 
-    get graph():Graph {
+    get graph(): Graph {
         return this._graph;
     }
 
@@ -34,13 +35,20 @@ export default class GraphCustom {
             groupByTypes: false,
             modes: {
                 // default:['drag-canvas', 'zoom-canvas', 'drag-node']
-                default: ['zoom-canvas'],
-                edit: ['drag-node', 'click-select',
+                default: [
+                    'zoom-canvas',
+                    BehaviorManage.Instance.behaviorMap.DefaultBehavior,
+                ],
+                edit: [
+                    'drag-node',
+                    'click-select',
                     {
                         type: Modes.createEdge,
                         trigger: 'click'
-                    }
-                ]
+                    },
+                    BehaviorManage.Instance.behaviorMap.DefaultBehavior,
+                ],
+                connect: ['add-edge']
             }
         });
         graph.setMode('edit')
@@ -62,13 +70,13 @@ export default class GraphCustom {
         graph.on("edge:click", (ev) => {
             console.log("点击的边:", ev)
         })
-        graph.on('node:mouseenter', (e) => {
-            const node = e.item;
-            graph.setItemState(node, 'active', true);
-            graph.paint();
-        })
-        graph.on('node:mouseleave',(e)=>{
-            graph.setItemState(e.item,'active',false);
+        // graph.on('node:mouseenter', (e) => {
+        //     const node = e.item;
+        //     graph.setItemState(node, 'active', true);
+        //     graph.paint();
+        // })
+        graph.on('node:mouseleave', (e) => {
+            graph.setItemState(e.item, 'active', false);
         })
         graph.on('edge:mouseenter', (ev) => {
             const edge = ev.item;

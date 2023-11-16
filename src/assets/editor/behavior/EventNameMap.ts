@@ -1,0 +1,26 @@
+const enum EventNameMap {
+    click = 'click',
+    dblclick = 'dblclick',
+    dragstart = 'dragstart',
+    drag = 'drag',
+    dragend = 'dragend',
+    dragenter = 'dragenter',
+    dragleave = 'dragleave',
+    dragover = 'dragover',
+    drop = 'drop',
+    mousedown = 'mousedown',
+    mouseenter = 'mouseenter',
+    mouseup = 'mouseup',
+    mousemove = 'mousemove',
+    mouseout = 'mouseout',
+    mouseover = 'mouseover',
+    mouseleave = 'mouseleave',
+    panestart = 'panestart',
+    panmove = 'panmove',
+    panend = 'panend',
+    touchstart = 'touchstart',
+    touchmove = 'touchmove',
+    touchend = 'touchend',
+    contextmenu = 'contextmenu'
+}
+export default EventNameMap;

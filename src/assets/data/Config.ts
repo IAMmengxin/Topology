@@ -60,7 +60,7 @@ export enum GroupShapeType {
 
 //内嵌的shape的类型（按功能区分）
 export enum AnchorType {
-    connector = 0,
+    addEdge = 0,
     scale = 1
 }
 

@@ -4,7 +4,7 @@ import Config, {AnchorType, GroupShapeType, NodeBuildInType} from "../../data/Co
 import GroupCfg from "../g6-construct/GroupCfg";
 import AttrsConstruct from "../g6-construct/shape/AttrsConstruct";
 import GraphCustom from "../tool/GraphCustom";
-import {IGroup} from "@antv/g6";
+import {IGroup, INode} from "@antv/g6";
 import AntVData from "../../data/AntVData";
 
 export default class RectGroup {
@@ -14,11 +14,16 @@ export default class RectGroup {
             new NodeConstruct(id, x, y, size, NodeBuildInType.rect);
         nodeStruct.label = '新增';
         let node = G6Manager.addNode(nodeStruct);
+    }
+
+    static addRectShape(node:INode){
+        const model = node.getModel() as NodeConstruct;
+        let size = model.size;
         let group = node.getContainer();//node.get('group')
         group.cfg.id = G6Manager.getRandomId('group');
         let anchorPoint = Config.AnchorPoints[Config.AnchorDirect.leftMiddle];
         let shapeType = GroupShapeType.circle;
-        let anchorType = AnchorType.connector;
+        let anchorType:AnchorType = AnchorType.addEdge;
         this.addShape(group,anchorPoint,shapeType,size,anchorType);
         anchorPoint = Config.AnchorPoints[Config.AnchorDirect.rightMiddle];
         this.addShape(group,anchorPoint,shapeType,size,anchorType);
@@ -26,7 +31,16 @@ export default class RectGroup {
         this.addShape(group,anchorPoint,shapeType,size,anchorType);
         anchorPoint = Config.AnchorPoints[Config.AnchorDirect.bottomMiddle];
         this.addShape(group,anchorPoint,shapeType,size,anchorType);
-        console.log(GraphCustom.Instance.graph.save())
+        anchorType = AnchorType.scale;
+        anchorPoint = Config.AnchorPoints[Config.AnchorDirect.leftTop];
+        this.addShape(group,anchorPoint,shapeType,size,anchorType);
+        anchorPoint = Config.AnchorPoints[Config.AnchorDirect.rightTop];
+        this.addShape(group,anchorPoint,shapeType,size,anchorType);
+        anchorPoint = Config.AnchorPoints[Config.AnchorDirect.leftBottom];
+        this.addShape(group,anchorPoint,shapeType,size,anchorType);
+        anchorPoint = Config.AnchorPoints[Config.AnchorDirect.rightBottom];
+        this.addShape(group,anchorPoint,shapeType,size,anchorType);
+        model.addShape = true;
         GraphCustom.Instance.graph.paint();
     }
 
@@ -38,5 +52,8 @@ export default class RectGroup {
             new AttrsConstruct(shapeId, size, anchorPoint,
                 3, anchorType);
         group.addShape(shapeType, groupCfg);
+    }
+    static ShowShape(isShow:boolean):void{
+
     }
 }

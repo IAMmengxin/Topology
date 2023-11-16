@@ -1,59 +1,59 @@
 import GraphCustom from "../tool/GraphCustom";
 import AntVData from "../../data/AntVData";
-import {ICombo, IEdge, INode, Item} from "@antv/g6";
+import {Graph, ICombo, IEdge, INode} from "@antv/g6";
 import NodeConstruct from "../g6-construct/build-in/NodeConstruct";
 import EdgeConstruct from "../g6-construct/build-in/EdgeConstruct";
-import {ItemType, NodeBuildInType} from "../../data/Config";
+import {ItemType} from "../../data/Config";
 
 let Instance: G6Manager = null;
 export default class G6Manager {
     //根据id存储节点,type:Map<string,NodeConstruct>
-    _nodesById:Map<string,INode>;
+    _nodesById: { [key: string]: INode };
     //根据comboId存储节点,type:Map<string,Array<NodeConstruct>>
-    _nodesByComboId:Map<string,Array<INode>>;
+    _nodesByComboId: { [key: string]: Array<INode> };
 
     //根据type存储节点,type:Map<string,NodeConstruct>
-    _nodesByType:Map<string,Array<INode>>;
+    _nodesByType: { [key: string]: Array<INode> };
     //根据name存储节点,type:Map<string,Array<NodeConstruct>>
-    _nodesByName:Map<string,Array<INode>>;
+    _nodesByName: { [key: string]: Array<INode> };
     //根据id存储边,type:Map<string,EdgeConstruct>
-    _edgesById:Map<string,IEdge>;
+    _edgesById: { [key: string]: IEdge };
     //根据type存储边
-    _edgesByType:Map<string,Array<IEdge>>;
+    _edgesByType: { [key: string]: Array<IEdge> };
     //根据name存储边,type:Map<string,Array<EdgeConstruct>>
-    _edgesByName:Map<string,Array<IEdge>>;
+    _edgesByName: { [key: string]: Array<IEdge> };
     //根据id存储组件,type:Map<string,ComboConstruct>
-    _combosById:Map<string,ICombo>;
+    _combosById: { [key: string]: ICombo };
     _menuWidth: number;
 
     //菜单栏宽度
     constructor() {
-        this._nodesByComboId = new Map<string, Array<INode>>();
-        this._nodesById = new Map<string, INode>();
-        this._nodesByType = new Map<string, Array<INode>>();
-        this._nodesByName = new Map<string, Array<INode>>();
-        this._edgesById = new Map<string, IEdge>();
-        this._edgesByType = new Map<string,Array<IEdge> >();
-        this._edgesByName = new Map<string, Array<IEdge>>();
-        this._combosById = new Map<string, ICombo>();
+        this._nodesByComboId = {};
+        this._nodesById = {};
+        this._nodesByType = {};
+        this._nodesByName = {};
+        this._edgesById = {};
+        this._edgesByType = {};
+        this._edgesByName = {};
+        this._combosById = {};
         //菜单栏宽度
         this._menuWidth = 0;
         let nodes = GraphCustom.Instance.graph.getNodes();
         for (let node of nodes) {
-            this.addNodeId(node._cfg.id,node);
-            this.addNodeType(node._cfg.type,node);
-            this.addNodeName(node._cfg.model['name'],node);
-            this.addNodeComboId(node._cfg.model['comboId'],node);
+            this.addNodeId(node._cfg.id, node);
+            this.addNodeType(node._cfg.type, node);
+            this.addNodeName(node._cfg.model['name'], node);
+            this.addNodeComboId(node._cfg.model['comboId'], node);
         }
         let edges = GraphCustom.Instance.graph.getEdges();
         for (let edge of edges) {
-            this.addEdgeId(edge._cfg.id,edge);
-            this.addEdgeType(edge._cfg.type,edge);
-            this.addEdgeName(edge._cfg.model['name'],edge);
+            this.addEdgeId(edge._cfg.id, edge);
+            this.addEdgeType(edge._cfg.type, edge);
+            this.addEdgeName(edge._cfg.model['name'], edge);
         }
         let combos = GraphCustom.Instance.graph.getCombos();
         for (let combo of combos) {
-            this.addNodeComboId(combo._cfg.id,combo);
+            this.addNodeComboId(combo._cfg.id, combo);
         }
     }
 
@@ -72,105 +72,100 @@ export default class G6Manager {
         return Instance;
     }
 
-    addNodeId(id:string,iNode: INode): void {
-        this._nodesById.set(id,iNode);
+    addNodeId(id: string, iNode: INode): void {
+        this._nodesById[id] = iNode;
     }
 
-    addNodeComboId(comboId:string, iNode: INode): void {
+    addNodeComboId(comboId: string, iNode: INode): void {
         if (!comboId)
             return;
-        let nodesByComboId:INode[] = this._nodesByComboId.get(comboId);
+        let nodesByComboId: INode[] = this._nodesByComboId[comboId];
         if (!nodesByComboId) {
-            this._nodesByComboId.set(comboId,new Array<INode>());
-            nodesByComboId = this._nodesByComboId.get(comboId);
+            nodesByComboId = this._nodesByComboId[comboId] = new Array<INode>();
         }
         nodesByComboId.push(iNode);
     }
 
-    addNodeType(type:string,iNode: INode): void {
-        let nodesByType = this._nodesByType.get(type);
+    addNodeType(type: string, iNode: INode): void {
+        let nodesByType = this._nodesByType[type];
         if (!nodesByType) {
-            this._nodesByType.set(type, []);
-            nodesByType = this._nodesByType.get(type);
+            nodesByType = this._nodesByType[type]= [];
         }
         nodesByType.push(iNode);
     }
 
-    addNodeName(name:string,iNode:INode) {
-        let nodesByName = this._nodesByName.get(name);
+    addNodeName(name: string, iNode: INode) {
+        let nodesByName = this._nodesByName[name];
         if (!nodesByName) {
-            this._nodesByName.set(name,new Array<INode>());
-            nodesByName = this._nodesByName.get(name);
+            nodesByName =this._nodesByName[name]= new Array<INode>();
         }
         nodesByName.push(iNode);
     }
 
-    addEdgeId(id:string,iEdge:IEdge) {
-        this._edgesById.set(id, iEdge);
+    addEdgeId(id: string, iEdge: IEdge) {
+        this._edgesById[id]= iEdge;
     }
 
-    addEdgeType(type:string,iEdge:IEdge) {
-        let edgesByType = this._edgesByType.get(type);
+    addEdgeType(type: string, iEdge: IEdge) {
+        let edgesByType = this._edgesByType[type];
         if (!edgesByType) {
-            this._edgesByType.set(type,  []);
-            edgesByType = this._edgesByType.get(type);
+            edgesByType =this._edgesByType[type]= [];
         }
         edgesByType.push(iEdge);
     }
 
-    addEdgeName(name:string,iEdge:IEdge) {
-        let edgesByName = this._edgesByName.get(name);
+    addEdgeName(name: string, iEdge: IEdge) {
+        let edgesByName = this._edgesByName[name];
         if (!edgesByName) {
-            this._edgesByName.set(name, []);
-            edgesByName = this._edgesByName.get(name);
+            edgesByName = this._edgesByName[name]= [];
         }
         edgesByName.push(iEdge);
     }
 
     addComboId(combo) {
-        this._combosById.set(combo.id, combo);
+        this._combosById[combo.id]= combo;
     }
 
     /*
     * @return {NodeData}
     * */
     public getNodeById(id) {
-        return this._nodesById.get(id);
+        return this._nodesById[id];
     }
 
     /*
     * @return {Array<NodeData>}
     * */
     public getNodeByType(type) {
-        return this._nodesByType.get(type);
+        return this._nodesByType[type];
     }
 
     /*
     * @return {Array<NodeData>}
     * */
     public getNodeByName(name) {
-        return this._nodesByName.get(name);
+        return this._nodesByName[name];
     }
 
     /*
 * @return {NodeData}
 * */
     public getEdgeById(id) {
-        return this._nodesById.get(id);
+        return this._nodesById[id];
     }
 
     /*
     * @return {Array<NodeData>}
     * */
     getEdgeByType(type) {
-        return this._nodesByType.get(type);
+        return this._nodesByType[type];
     }
 
     /*
     * @return {Array<NodeData>}
     * */
     getEdgeByName(name) {
-        return this._nodesByName.get(name);
+        return this._nodesByName[name];
     }
 
     /*
@@ -178,22 +173,24 @@ export default class G6Manager {
     * */
     static addNode(node: NodeConstruct): INode {
         let self = this.Instance;
-        if (self._nodesById.get(node.id))
+        if (self._nodesById[node.id])
             return null;
         node.x -= self.menuWidth;
         AntVData.nodes.push(node);
-        graph.addItem()
         let graph = GraphCustom.Instance.graph;
+        this.addItem(graph, ItemType.node, node);
         graph.paint();
         let iNode: INode = graph.findById(node.id) as INode;
-        self.addNodeComboId(node.comboId,iNode);
-        self.addNodeId(node.id,iNode);
-        self.addNodeName(node.name,iNode);
-        self.addNodeType(node.type,iNode);
+        self.addNodeComboId(node.comboId, iNode);
+        self.addNodeId(node.id, iNode);
+        self.addNodeName(node.name, iNode);
+        self.addNodeType(node.type, iNode);
         return iNode;
     }
 
-    static addItem(type:ItemType,model:NodeConstruct)
+    static addItem(graph: Graph, type: ItemType, model: NodeConstruct, stack = true): void {
+        graph.addItem(type, model, stack);
+    }
 
     static setMenuWidth(value): void {
         this.Instance.menuWidth = value;
@@ -202,17 +199,17 @@ export default class G6Manager {
     /*
     * @param {EdgeConstruct} edge 边数据,type:EdgeConstruct
     * */
-    static addEdge(edge:EdgeConstruct):boolean {
+    static addEdge(edge: EdgeConstruct): boolean {
         let self = this.Instance;
-        if (self._edgesById.get(edge.id))
+        if (self._edgesById[edge.id])
             return false;
         AntVData.edges.push(edge);
         let graph = GraphCustom.Instance.graph;
         graph.paint();
-        let iNode:IEdge = graph.findById(edge.id) as IEdge;
-        self.addEdgeId(edge.id,iNode);
-        self.addEdgeName(edge.name,iNode);
-        self.addEdgeType(edge.type,iNode);
+        let iNode: IEdge = graph.findById(edge.id) as IEdge;
+        self.addEdgeId(edge.id, iNode);
+        self.addEdgeName(edge.name, iNode);
+        self.addEdgeType(edge.type, iNode);
         return true;
     }
 
@@ -222,7 +219,7 @@ export default class G6Manager {
     */
     static getRandomId(pre = '') {
         let random = pre + '_' + Math.floor(Math.random() * 100000000);
-        while (this.Instance._nodesById.get(random)) {
+        while (this.Instance._nodesById[random]) {
             random = pre + '_' + Math.floor(Math.random() * 100000000);
         }
         return random.toString();

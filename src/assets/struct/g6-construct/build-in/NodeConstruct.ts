@@ -26,6 +26,7 @@ export default class NodeConstruct extends BaseConstruct{
     style: Style;
     //所属组件id
     comboId: string;
+    addShape: boolean;
 
 
     /*
@@ -51,6 +52,7 @@ export default class NodeConstruct extends BaseConstruct{
         this.anchorPoints = anchorPoints;
         this.style = style;
         this.comboId = comboId;
+        this.addShape = false;
     }
 }
 
