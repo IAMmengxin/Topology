@@ -1,10 +1,8 @@
-import AttrsConstruct from "./shape/AttrsConstruct";
+import BaseAttrs from "./shape/BaseAttrs";
 
-export default class GroupCfg{
-    //id
-    id:string;
+export default class GroupCfg {
     //图形样式，必须配置，类型AttrsConstruct
-    attrs:any;
+    attrs:BaseAttrs;
     //图形分组的标识，非必须指定，可以不唯一。在 G6 3.3 及以后版本中必须指定。另外，
     // name 可以用于组内搜索到该元素：const shape = group.find(element =>
     // element.get('name') === 'shape-name')，find 函数用法见 find(fn). type:string
@@ -19,13 +17,12 @@ export default class GroupCfg{
     //type:number
     zIndex:number;
     /*
-    * @param {AttrsConstruct} attrs 图形样式，必须配置,type:AttrsConstruct
+    * @param {BaseAttrs} attrs 图形样式，必须配置,type:BaseAttrs
     * */
-    constructor(id,capture = true,visible = true,draggable = false
-                ,name = null,attrs:any = null,zIndex = 0) {
+    constructor(name:string,capture = true,visible = true,draggable = false,
+                attrs:BaseAttrs = null,zIndex = 0) {
         this.attrs = attrs;
-        this.id = id;
-        this.name = name===null?id:name;
+        this.name = name;
         this.capture = capture;
         this.visible = visible;
         this.draggable = draggable;

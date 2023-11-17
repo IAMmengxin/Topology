@@ -59,7 +59,7 @@ class Style {
     stroke: string;
     //线宽
     lineWidth: number;
-    //在鼠标移上去时增大选中宽度
+    //如果线太细导致鼠标很难移上去，可选中增大这个值
     lineAppendWidth: number;
     //开始的箭头
     startArrow: ArrowStruct;

@@ -29,6 +29,7 @@ export default class NodeConstruct extends BaseConstruct{
     addShape: boolean;
 
 
+
     /*
     * @param {string} id 节点id,type:string
     * @param {string} name 节点名称,type:string
@@ -67,7 +68,7 @@ class Style extends BaseStyleConstruct {
     * @param {number} radius 半径,type:number
     * @param {BaseStyleConstruct} baseStyle 半径,type:BaseStyleConstruct
     * */
-    constructor(baseStyle: BaseStyleConstruct, lineWidth: number = 1, radius: number = 0) {
+    constructor(baseStyle: BaseStyleConstruct = new BaseStyleConstruct(), lineWidth: number = 1, radius: number = 0) {
         super(baseStyle.stroke, baseStyle.fill, baseStyle.active, baseStyle.selected,
             baseStyle.highlight, baseStyle.inactive, baseStyle.disable);
         this.lineWidth = lineWidth;

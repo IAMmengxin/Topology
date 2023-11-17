@@ -11,5 +11,6 @@ export default class BaseConstruct{
     constructor(id:string,size,x,y, type:GroupShapeType) {
         this.id = id;
         this.type = type;
+        this.size = size;
     }
 }

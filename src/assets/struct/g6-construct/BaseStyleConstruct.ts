@@ -1,30 +1,32 @@
+import {CursorType} from "../../data/Config";
+
 export default class BaseStyleConstruct {
     //填充颜色,type:rgba or string(#ffffff)
-    fill:string;
+    public fill:string;
     //描边颜色,type:rgba or string(#ffffff)
-    stroke:string;
+    public stroke:string;
     //激活时的样式,type:BaseStyleConstruct
-    active:BaseStyleConstruct;
+    public active:BaseStyleConstruct;
     //选中时的样式,type:BaseStyleConstruct
-    selected:BaseStyleConstruct;
+    public selected:BaseStyleConstruct;
     //高亮时的样式,type:BaseStyleConstruct
-    highlight:BaseStyleConstruct;
+    public highlight:BaseStyleConstruct;
     //进入激活状态时的样式,type:BaseStyleConstruct
-    inactive:BaseStyleConstruct;
+    public inactive:BaseStyleConstruct;
     //disable状态时的样式,type:BaseStyleConstruct
-    disable:BaseStyleConstruct;
+    public disable:BaseStyleConstruct;
     //阴影颜色,type:rgba or string(#ffffff)
-    shadowColor:string;
+    public shadowColor:string;
     //阴影模糊程度,type:number
-    shadowBlur:number;
+    public shadowBlur:number;
     //描边虚线
-    lineDash:Array<Number>;
+    public lineDash:Array<Number>;
     //设置绘图的当前 alpha 或透明值
-    opacity:number;
+    public opacity:number;
     //设置填充的 alpha 或透明值
-    fillOpacity:number;
+    public fillOpacity:number;
     //鼠标在该节点上时的鼠标样式，CSS 的 cursor 选项都支持
-    cursor:string;
+    public cursor:CursorType;
 
     /*
     * @param {string} stroke 描边颜色,type:rgba or string(#ffffff)
@@ -46,7 +48,7 @@ export default class BaseStyleConstruct {
                 inactive:BaseStyleConstruct = null, disable:BaseStyleConstruct = null,
                 shadowColor:string = null, shadowBlur:number = 0,
                 lineDash:number[] = null,opacity:number = 1,fillOpacity:number = 1,
-                cursor:string = 'default') {
+                cursor:CursorType = CursorType.default) {
         this.stroke = stroke;
         this.fill = fill;
         this.active = active;

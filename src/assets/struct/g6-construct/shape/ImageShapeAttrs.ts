@@ -1,8 +1,8 @@
-import NodeConstruct from "../build-in/NodeConstruct";
-import Config from "../../../data/Config";
+
+import BaseAttrs from "./BaseAttrs";
 
 
-export default class ImageShapeConstruct extends NodeConstruct{
+export default class ImageShapeAttrs extends BaseAttrs{
     //图片宽度
     width:number;
     //图片高度
@@ -12,8 +12,8 @@ export default class ImageShapeConstruct extends NodeConstruct{
     /*
     * @param {string} img 图片源,G6 支持多种格式的图片：url、ImageData、Image、canvas,type:string
     * */
-    constructor(id:string,x:number, y:number,width:number,height:number,img:string) {
-        super(id,x, y, null, Config.GroupShapeType.polygon);
+    constructor(id:string,size:number[],anchor:number[],anchorType,width:number,height:number,img:string) {
+        super(id,size,anchor,anchorType);
         this.width = width;
         this.height = height;
         this.img = img;

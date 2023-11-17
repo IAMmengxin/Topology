@@ -60,7 +60,7 @@ export enum GroupShapeType {
 
 //内嵌的shape的类型（按功能区分）
 export enum AnchorType {
-    addEdge = 0,
+    connector = 0,
     scale = 1
 }
 
@@ -105,6 +105,16 @@ export enum Modes {
 
 export enum ItemType {
     node = 'node', edge = 'edge', combo = 'combo', vedge = 'vedge'
+}
+//https://developer.mozilla.org/en-US/docs/Web/CSS/cursor,类型的详情见链接
+export enum CursorType{
+    auto = 'auto',default='default',contextMenu='context-menu',help='help',pointer='pointer',
+    progress='progress',wait='wait',cell='cell',crosshair='crosshair',text='text',verticalText='vertical-text',
+    alias='alias',copy='copy',move='move',noDrop='no-drop',notAllowed='not-allowed',grab='grab',
+    grabbing='grabbing',allScroll='all-scroll',colResize='col-resize',rowResize='row-resize',
+    nResize='n-resize',eResize='e-resize',sResize='s-resize',wResize='w-resize',neResize='ne-resize',
+    nwResize='nw-resize',seResize='se-resize',swResize='sw-resize',ewResize='ew-resize',nsResize='ns-resize',
+    neswResize='nesw-resize',nwseResize='nwse-resize',zoomIn='zoom-in',zoomOut='zoom-out'
 }
 
 export default Config;

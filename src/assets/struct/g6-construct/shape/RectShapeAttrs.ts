@@ -1,9 +1,7 @@
-import BaseStyleConstruct from "../BaseStyleConstruct";
-import BaseConstruct from "./BaseConstruct";
-import {GroupShapeType} from "../../../data/Config";
+import BaseAttrs from "./BaseAttrs";
 
 
-export default class RectShapeConstruct extends BaseConstruct{
+export default class RectShapeAttrs extends BaseAttrs{
     //矩形的宽度
     width:number;
     //矩形的高度
@@ -13,10 +11,8 @@ export default class RectShapeConstruct extends BaseConstruct{
     // - radius 缩写为 [ 1, 2 ] 相当于 [ 1, 2, 1, 2 ]
     // - radius 缩写为 [ 1, 2, 3 ] 相当于 [ 1, 2, 3, 2 ]
     radius:number[];
-    style:BaseStyleConstruct;
-    constructor(id:string,size,x:number,y:number,width:number,height:number,radius:number[]) {
-        super(id,size,x,y, GroupShapeType.rect);
-        this.style = new BaseStyleConstruct();
+    constructor(id:string,size:number[],anchor:number[],anchorType,width:number,height:number,radius:number[]) {
+        super(id,size,anchor,anchorType);
         this.width = width;
         this.height = height;
         this.radius = radius;

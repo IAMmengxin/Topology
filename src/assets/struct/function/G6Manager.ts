@@ -40,10 +40,11 @@ export default class G6Manager {
         this._menuWidth = 0;
         let nodes = GraphCustom.Instance.graph.getNodes();
         for (let node of nodes) {
+            const nodeConstruct = node.getModel() as NodeConstruct;
             this.addNodeId(node._cfg.id, node);
             this.addNodeType(node._cfg.type, node);
-            this.addNodeName(node._cfg.model['name'], node);
-            this.addNodeComboId(node._cfg.model['comboId'], node);
+            this.addNodeName(nodeConstruct.name, node);
+            this.addNodeComboId(nodeConstruct.comboId, node);
         }
         let edges = GraphCustom.Instance.graph.getEdges();
         for (let edge of edges) {

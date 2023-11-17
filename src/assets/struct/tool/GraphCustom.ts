@@ -42,13 +42,14 @@ export default class GraphCustom {
                 edit: [
                     'drag-node',
                     'click-select',
-                    {
-                        type: Modes.createEdge,
-                        trigger: 'click'
-                    },
+                    // {
+                    //     type: Modes.createEdge,
+                    //     trigger: 'click'
+                    // },
                     BehaviorManage.Instance.behaviorMap.DefaultBehavior,
                 ],
-                connect: ['add-edge']
+                AddEdge:['AddEdge'],
+                Scale:['Scale'],
             }
         });
         graph.setMode('edit')
