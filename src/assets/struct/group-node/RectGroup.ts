@@ -19,7 +19,7 @@ export default class RectGroup {
     }
 
     static addRectShape(node:INode){
-        const model = node.getModel() as NodeConstruct;
+        const model = <unknown>node.getModel() as NodeConstruct;
         const nodeId = model.id;
         let size = model.size;
         let group = node.getContainer();//node.get('group')

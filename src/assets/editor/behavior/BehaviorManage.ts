@@ -1,5 +1,5 @@
 import DefaultBehavior from "./MouseBehavior/DefaultBehavior";
-import {registerBehavior} from "@antv/g6";
+import {BehaviorOption, registerBehavior} from "@antv/g6";
 import {ItemType} from "../../data/Config";
 import EventNameMap from "./EventNameMap";
 import AddEdge from "./AddEdge";
@@ -24,9 +24,9 @@ export default class BehaviorManage{
         this.init();
     }
     init(){
-        registerBehavior(this.behaviorMap.DefaultBehavior,DefaultBehavior)
-        registerBehavior(this.behaviorMap.AddEdge,AddEdge);
-        registerBehavior(this.behaviorMap.Scale,Scale);
+        registerBehavior(this.behaviorMap.DefaultBehavior,DefaultBehavior as BehaviorOption)
+        registerBehavior(this.behaviorMap.AddEdge,AddEdge as BehaviorOption);
+        registerBehavior(this.behaviorMap.Scale,Scale as BehaviorOption);
     }
     static EventName(itemType:ItemType,eventName:EventNameMap){
         return itemType+':'+eventName;

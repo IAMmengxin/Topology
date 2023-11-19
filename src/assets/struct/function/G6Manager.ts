@@ -1,9 +1,10 @@
 import GraphCustom from "../tool/GraphCustom";
-import AntVData from "../../data/AntVData";
-import {Graph, ICombo, IEdge, INode} from "@antv/g6";
+import {Graph, ICombo, IEdge, INode, ModelConfig} from "@antv/g6";
 import NodeConstruct from "../g6-construct/build-in/NodeConstruct";
 import EdgeConstruct from "../g6-construct/build-in/EdgeConstruct";
 import {ItemType} from "../../data/Config";
+import BaseConstruct from "../g6-construct/build-in/BaseConstruct";
+import Vector2 from "../tool/Vector2";
 
 let Instance: G6Manager = null;
 export default class G6Manager {
@@ -25,6 +26,10 @@ export default class G6Manager {
     //根据id存储组件,type:Map<string,ComboConstruct>
     _combosById: { [key: string]: ICombo };
     _menuWidth: number;
+    //鼠标点击的位置
+    mouseDownPosition: Vector2;
+    //当前选中的节点
+    currentNode:INode;
 
     //菜单栏宽度
     constructor() {
@@ -38,9 +43,11 @@ export default class G6Manager {
         this._combosById = {};
         //菜单栏宽度
         this._menuWidth = 0;
+        this.mouseDownPosition = Vector2.Zero;
+        this.currentNode = null;
         let nodes = GraphCustom.Instance.graph.getNodes();
         for (let node of nodes) {
-            const nodeConstruct = node.getModel() as NodeConstruct;
+            const nodeConstruct = <unknown>node.getModel() as NodeConstruct;
             this.addNodeId(node._cfg.id, node);
             this.addNodeType(node._cfg.type, node);
             this.addNodeName(nodeConstruct.name, node);
@@ -48,9 +55,11 @@ export default class G6Manager {
         }
         let edges = GraphCustom.Instance.graph.getEdges();
         for (let edge of edges) {
-            this.addEdgeId(edge._cfg.id, edge);
-            this.addEdgeType(edge._cfg.type, edge);
-            this.addEdgeName(edge._cfg.model['name'], edge);
+            const edgeCfg: EdgeConstruct = edge._cfg as EdgeConstruct;
+            const edgeConstruct = <unknown>edge.getModel() as NodeConstruct;
+            this.addEdgeId(edgeCfg.id, edge);
+            this.addEdgeType(edgeCfg.type, edge);
+            this.addEdgeName(edgeConstruct.name, edge);
         }
         let combos = GraphCustom.Instance.graph.getCombos();
         for (let combo of combos) {
@@ -90,7 +99,7 @@ export default class G6Manager {
     addNodeType(type: string, iNode: INode): void {
         let nodesByType = this._nodesByType[type];
         if (!nodesByType) {
-            nodesByType = this._nodesByType[type]= [];
+            nodesByType = this._nodesByType[type] = [];
         }
         nodesByType.push(iNode);
     }
@@ -98,19 +107,19 @@ export default class G6Manager {
     addNodeName(name: string, iNode: INode) {
         let nodesByName = this._nodesByName[name];
         if (!nodesByName) {
-            nodesByName =this._nodesByName[name]= new Array<INode>();
+            nodesByName = this._nodesByName[name] = new Array<INode>();
         }
         nodesByName.push(iNode);
     }
 
     addEdgeId(id: string, iEdge: IEdge) {
-        this._edgesById[id]= iEdge;
+        this._edgesById[id] = iEdge;
     }
 
     addEdgeType(type: string, iEdge: IEdge) {
         let edgesByType = this._edgesByType[type];
         if (!edgesByType) {
-            edgesByType =this._edgesByType[type]= [];
+            edgesByType = this._edgesByType[type] = [];
         }
         edgesByType.push(iEdge);
     }
@@ -118,13 +127,13 @@ export default class G6Manager {
     addEdgeName(name: string, iEdge: IEdge) {
         let edgesByName = this._edgesByName[name];
         if (!edgesByName) {
-            edgesByName = this._edgesByName[name]= [];
+            edgesByName = this._edgesByName[name] = [];
         }
         edgesByName.push(iEdge);
     }
 
     addComboId(combo) {
-        this._combosById[combo.id]= combo;
+        this._combosById[combo.id] = combo;
     }
 
     /*
@@ -177,9 +186,9 @@ export default class G6Manager {
         if (self._nodesById[node.id])
             return null;
         node.x -= self.menuWidth;
-        AntVData.nodes.push(node);
+        // AntVData.nodes.push(node);
         let graph = GraphCustom.Instance.graph;
-        this.addItem(graph, ItemType.node, node);
+        this.addItem(graph, ItemType.node, <unknown>node as ModelConfig);
         graph.paint();
         let iNode: INode = graph.findById(node.id) as INode;
         self.addNodeComboId(node.comboId, iNode);
@@ -189,7 +198,7 @@ export default class G6Manager {
         return iNode;
     }
 
-    static addItem(graph: Graph, type: ItemType, model: NodeConstruct, stack = true): void {
+    static addItem(graph: Graph, type: ItemType, model: ModelConfig, stack = true): void {
         graph.addItem(type, model, stack);
     }
 
@@ -204,7 +213,7 @@ export default class G6Manager {
         let self = this.Instance;
         if (self._edgesById[edge.id])
             return false;
-        AntVData.edges.push(edge);
+        // AntVData.edges.push(edge);
         let graph = GraphCustom.Instance.graph;
         graph.paint();
         let iNode: IEdge = graph.findById(edge.id) as IEdge;

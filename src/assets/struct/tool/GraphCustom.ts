@@ -24,13 +24,15 @@ export default class GraphCustom {
         return this._graph;
     }
 
-    createGraph(mountNode) {
+    createGraph(mountNode:HTMLElement) {
         // 创建 G6 图实例
         const graph = new G6.Graph({
-            container: mountNode.value, // 指定图画布的容器 id，与第 9 行的容器对应
+            container: mountNode, // 指定图画布的容器 id，与第 9 行的容器对应
             // 画布宽高
-            width: Math.floor(window.innerWidth - window.innerWidth / 10),
-            height: window.innerHeight - 4,
+            // width: Math.floor(window.innerWidth - window.innerWidth / 10),
+            width: mountNode.offsetWidth,
+            // height: window.innerHeight - 4,
+            height: mountNode.offsetHeight,
             //启用combos时需要将groupByTypes设为false以获得正确的zIndex
             groupByTypes: false,
             modes: {

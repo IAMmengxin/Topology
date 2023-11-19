@@ -1,13 +1,15 @@
 <template>
-  <div id="mountNode" ref="mountNode"></div>
-  <div class="menu" ref="menuRef">
-    <div class="center">
-      <div class="rect" draggable="true"
-           @mousedown="rectMouseDown"
-           @dragstart="dragStart"
-           @dragend="dragEnd">节点
+  <div style="display: flex;flex-direction: row;width: 100vw;height: 100vh;">
+    <div class="menu" ref="menuRef">
+      <div class="center">
+        <div class="rect" draggable="true"
+             @mousedown="rectMouseDown"
+             @dragstart="dragStart"
+             @dragend="dragEnd">节点
+        </div>
       </div>
     </div>
+    <div id="mountNode" ref="mountNode"></div>
   </div>
 </template>
 
@@ -25,7 +27,7 @@ const showMove = ref(false);
 const mountNode = ref(null);
 onMounted(() => {
   console.log("G6版本:", G6.Global.version)
-  GraphCustom.Instance.createGraph(mountNode);
+  GraphCustom.Instance.createGraph(mountNode.value);
   G6Manager.setMenuWidth(menuRef.value.offsetWidth);
 })
 const Zero = Vector2.Zero;
@@ -51,21 +53,22 @@ function dragStart(e) {
 //   }
 // })
 function dragEnd(e) {
-    // debugger
-    // rectMoveRef.value.style.left = rectDragPosition.x + 'px';
-    // rectMoveRef.value.style.top = rectDragPosition.y + 'px';
-  rectDragPosition = new Vector2(e.offsetX,e.offsetY);
+  // debugger
+  // rectMoveRef.value.style.left = rectDragPosition.x + 'px';
+  // rectMoveRef.value.style.top = rectDragPosition.y + 'px';
+  rectDragPosition = new Vector2(e.offsetX, e.offsetY);
   // G6Manager.addNode(new NodeConstruct(G6Manager.getRandomId(),"newName",rectDragPosition.x,rectDragPosition.y,
   // [30,30],Config.NodeBuildInType.rect));
-  RectGroup.addRectComb(rectDragPosition.x,rectDragPosition.y,[80,30])
+  RectGroup.addRectComb(rectDragPosition.x, rectDragPosition.y, [80, 30])
 }
 </script>
 <style scoped>
 #mountNode {
-  position: absolute;
-  left: 10vw;
-  width: 90vw;
-  height: 100vh;
+  /*position: absolute;*/
+  flex: 1;
+  /*left: 10vw;*/
+  /*width: 90vw;*/
+  /*height: 100vh;*/
 }
 
 .menu {
@@ -80,7 +83,7 @@ function dragEnd(e) {
   margin-top: 10px;
   width: 150px;
   height: 20px;
-  //border: black solid 1px;
+  /*border: black solid 1 px;*/
   text-align: center;
   background-color: #cccfd0;
 }

@@ -1,7 +1,7 @@
 import {Arrow} from "@antv/g6";
 import Config from "./Config";
 
-const data:object = {
+const data = {
     // 点集
     nodes: [
         // {
