@@ -9,18 +9,18 @@ export const Config = {
         [1, 0],     //右上
         [0.5, 0],   //上侧中间
     ],
-    AnchorDirect: {
-        leftTop: 0,     //左上
-        leftMiddle: 1,  //左侧中间
-        leftBottom: 2,  //左下
-        bottomMiddle: 3,//下侧中间
-        rightBottom: 4, //右下
-        rightMiddle: 5, //右侧中间
-        rightTop: 6,    //右上
-        topMiddle: 7,   //上侧中间
-    },
     AnimEdge: ["polyline0", "polyline1", "polyline2", "polyline3"],
     AnchorColor: '#6ab7ff',
+}
+export enum AnchorDirect{
+    leftTop= 0,     //左上
+    leftMiddle= 1,  //左侧中间
+    leftBottom= 2,  //左下
+    bottomMiddle= 3,//下侧中间
+    rightBottom= 4, //右下
+    rightMiddle= 5, //右侧中间
+    rightTop= 6,    //右上
+    topMiddle= 7,   //上侧中间
 }
 
 export enum LabelPosition {

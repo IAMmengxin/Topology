@@ -32,11 +32,12 @@ const Scale: IEventMap = {
         // const height = canvasBox.height;
         // group.translate(difV.x/2,difV.y/2);
         model.size = [difV.x + model.size[0], difV.y + model.size[1]];
-        currentNode.getKeyShape().attr({
-            width: model.size[0],
-            height: model.size[1],
-        })
-        const position = new Vector2(attrs.x, attrs.y);
+        // currentNode.getKeyShape().attr({
+        //     width: model.size[0],
+        //     height: model.size[1],
+        // })
+        BehaviorManage.setNodeSize(currentNode);
+        // const position = new Vector2(attrs.x, attrs.y);
         // const width = Math.abs(attrs.width);
         // const height = Math.abs(attrs.height);
         // const ratioX = (difV.x + width) / width;
@@ -45,7 +46,7 @@ const Scale: IEventMap = {
         G6Manager.Instance.mouseDownPosition = currentPoint;
         GraphCustom.Instance.graph.paint();
         // console.log(GraphCustom.Instance.graph.save());
-        // console.log(currentNode);
+        console.log(currentNode);
     },
     [EventNameMap.mouseup]: (e: IG6GraphEvent) => {
         GraphCustom.Instance.graph.setMode('edit');

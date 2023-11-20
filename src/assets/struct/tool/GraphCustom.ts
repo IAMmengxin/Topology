@@ -1,11 +1,11 @@
-import G6, {Graph} from "@antv/g6";
+import G6, {Graph, Item} from "@antv/g6";
 import AntVData from "../../data/AntVData";
 import {AnimationCustom} from "../function/AnimationCustom";
 import Config, {Modes} from "../../data/Config";
 import BehaviorManage from "../../editor/behavior/BehaviorManage";
 
 let GraphCustomIns: GraphCustom = null;
-let lastSelectNode: any = null;
+let lastSelectNode: Item = null;
 export default class GraphCustom {
     _graph: Graph;
 
@@ -43,7 +43,7 @@ export default class GraphCustom {
                 ],
                 edit: [
                     'drag-node',
-                    'click-select',
+                    // 'click-select',
                     // {
                     //     type: Modes.createEdge,
                     //     trigger: 'click'
@@ -52,21 +52,45 @@ export default class GraphCustom {
                 ],
                 AddEdge:['AddEdge'],
                 Scale:['Scale'],
-            }
+            },
+            nodeStateStyles:{
+                'select:1':{
+                    stroke: '#ff1865',
+                    lineWidth: 3,
+                },
+                'select:0':{
+                    // stroke: '#3fff18',
+                    lineWidth: 1,
+                },
+                click:{
+                    stroke: '#1890ff',
+                },
+            },
         });
-        graph.setMode('edit')
+        graph.setMode('edit');
         this._graph = graph;
-        // graph.on("node:click", (ev) => {
-        //     console.log("点击的Node：", ev.item);
-        //     const edge = ev.item;
-        //     graph.setItemState(edge,'selected',!edge.hasState('selected'))
-        //     if(lastSelectNode!==edge){
-        //         if(lastSelectNode!==null){
-        //             graph.setItemState(lastSelectNode,'selected',false)
-        //         }
-        //         lastSelectNode = edge;
-        //     }
-        // })
+        graph.on("node:click", (ev) => {
+            console.log("点击的Node：", ev.item);
+            const node = ev.item;
+            if(lastSelectNode!==null){
+                graph.setItemState(lastSelectNode,'select','0');
+                if(lastSelectNode!==node){
+                    graph.setItemState(node,'select','1')
+                    lastSelectNode = node;
+                }else{
+                    lastSelectNode = null;
+                }
+            }else{
+                graph.setItemState(node,'select','1');
+                lastSelectNode = node;
+            }
+        })
+        graph.on("canvas:click", (ev) => {
+            if(lastSelectNode!==null) {
+                graph.setItemState(lastSelectNode,'select','0');
+                lastSelectNode = null;
+            }
+        })
         graph.on("combo:click", (ev) => {
             console.log("点击的组件:", ev)
         })

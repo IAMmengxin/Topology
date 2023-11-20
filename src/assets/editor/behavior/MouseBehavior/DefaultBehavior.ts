@@ -58,7 +58,7 @@ const DefaultBehavior: IEventMap = {
         }
         const graph = GraphCustom.Instance.graph;
         graph.setItemState(e.item, 'active', false);
-
+        BehaviorManage.setNodeSize(item);
         GraphCustom.Instance.graph.paint();
     },
 }

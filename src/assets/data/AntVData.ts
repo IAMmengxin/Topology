@@ -1,5 +1,5 @@
 import {Arrow} from "@antv/g6";
-import Config from "./Config";
+import Config, {AnchorDirect} from "./Config";
 
 const data = {
     // 点集
@@ -283,7 +283,7 @@ const data = {
             type: 'polyline0',
             id:'目标id',
             name:'目标name',
-            sourceAnchor: Config.AnchorDirect.topMiddle,
+            sourceAnchor: AnchorDirect.topMiddle,
             // label: '我是连线', // 边的文本
             style: {
                 radius: 2,
@@ -300,8 +300,8 @@ const data = {
             source: '油冷器0', // 起始点 id
             target: '阀门0', // 目标点 id
             type: 'polyline1',
-            sourceAnchor: Config.AnchorDirect.leftMiddle,
-            targetAnchor: Config.AnchorDirect.topMiddle,
+            sourceAnchor: AnchorDirect.leftMiddle,
+            targetAnchor: AnchorDirect.topMiddle,
             // label: '我是连线', // 边的文本
             style: {
                 radius: 2,
@@ -314,8 +314,8 @@ const data = {
             source: '油冷器1', // 起始点 id
             target: 'l0_t0_oliBox_t2', // 目标点 id
             type: 'polyline2',
-            sourceAnchor: Config.AnchorDirect.topMiddle,
-            targetAnchor: Config.AnchorDirect.rightMiddle,
+            sourceAnchor: AnchorDirect.topMiddle,
+            targetAnchor: AnchorDirect.rightMiddle,
             // label: '我是连线', // 边的文本
             style: {
                 radius: 2,
@@ -333,8 +333,8 @@ const data = {
             source: '油冷器1', // 起始点 id
             target: '阀门0', // 目标点 id
             type: 'polyline3',
-            sourceAnchor: Config.AnchorDirect.bottomMiddle,
-            targetAnchor: Config.AnchorDirect.rightMiddle,
+            sourceAnchor: AnchorDirect.bottomMiddle,
+            targetAnchor: AnchorDirect.rightMiddle,
             // label: '我是连线', // 边的文本
             style: {
                 radius: 2,
