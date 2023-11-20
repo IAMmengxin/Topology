@@ -25,17 +25,13 @@ const Scale: IEventMap = {
         // console.log("移动后的位置",currentPoint);
         const difV = currentPoint.sub(G6Manager.Instance.mouseDownPosition);
         const currentNode = G6Manager.Instance.currentNode;
-        const group: IGroup = currentNode.getContainer();
+        // const group: IGroup = currentNode.getContainer();
         const attrs: RectShapeAttrs = currentNode.getKeyShape().attr() as RectShapeAttrs;
         const model: NodeConstruct = <object>currentNode.getModel() as NodeConstruct;
-        const canvasBox = currentNode.getKeyShape().getCanvasBBox();
-        const bBox = currentNode.getKeyShape().getBBox();
         // const width = canvasBox.width;
         // const height = canvasBox.height;
         // group.translate(difV.x/2,difV.y/2);
         model.size = [difV.x + model.size[0], difV.y + model.size[1]];
-        canvasBox.width = model.size[0];
-        canvasBox.height = model.size[1];
         currentNode.getKeyShape().attr({
             width: model.size[0],
             height: model.size[1],
@@ -48,10 +44,8 @@ const Scale: IEventMap = {
         // group.scale(ratioX,ratioY)
         G6Manager.Instance.mouseDownPosition = currentPoint;
         GraphCustom.Instance.graph.paint();
-        console.log(GraphCustom.Instance.graph.save());
-        console.log(AntVData);
-        // console.log("model:", model.size, "\nattrs:", attrs.x, attrs.y)
-        console.log(currentNode);
+        // console.log(GraphCustom.Instance.graph.save());
+        // console.log(currentNode);
     },
     [EventNameMap.mouseup]: (e: IG6GraphEvent) => {
         GraphCustom.Instance.graph.setMode('edit');

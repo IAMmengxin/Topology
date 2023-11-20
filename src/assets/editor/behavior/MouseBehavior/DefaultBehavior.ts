@@ -29,6 +29,9 @@ const DefaultBehavior: IEventMap = {
         } else {
             showChildren(true, item);
         }
+        const graph = GraphCustom.Instance.graph;
+        graph.setItemState(item, 'active', true);
+        graph.paint();
     },
     ['node'+EventNameMap.mousedown]: (e:IG6GraphEvent) => {
         G6Manager.Instance.currentNode = e.item as INode;
@@ -53,6 +56,9 @@ const DefaultBehavior: IEventMap = {
         if (model.addShape) {
             showChildren(false, item)
         }
+        const graph = GraphCustom.Instance.graph;
+        graph.setItemState(e.item, 'active', false);
+
         GraphCustom.Instance.graph.paint();
     },
 }

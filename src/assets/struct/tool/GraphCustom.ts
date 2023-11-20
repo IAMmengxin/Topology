@@ -73,14 +73,6 @@ export default class GraphCustom {
         graph.on("edge:click", (ev) => {
             console.log("点击的边:", ev)
         })
-        // graph.on('node:mouseenter', (e) => {
-        //     const node = e.item;
-        //     graph.setItemState(node, 'active', true);
-        //     graph.paint();
-        // })
-        graph.on('node:mouseleave', (e) => {
-            graph.setItemState(e.item, 'active', false);
-        })
         graph.on('edge:mouseenter', (ev) => {
             const edge = ev.item;
             graph.setItemState(edge, 'active', true);
@@ -90,7 +82,7 @@ export default class GraphCustom {
         })
         // graph.setMode('edit');
 // 读取数据
-        graph.data(AntVData);
+        graph.data(<object>AntVData);
 // 渲染图
         AnimationCustom.EdgeAnim(Config.AnimEdge[0]).addFlowAnim();
         AnimationCustom.EdgeAnim(Config.AnimEdge[1]).addFlowAnim();

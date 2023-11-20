@@ -55,7 +55,7 @@ export default class RectGroup {
 
     static addCircleShape(group: IGroup, anchorPoint: number[], shapeType: GroupShapeType, size: number[],
                     anchorType: AnchorType,nodeId,cursorType:CursorType): void {
-        const shapeName = nodeId+'shape';
+        const shapeName = nodeId;
         const groupCfg = new GroupCfg(shapeName);
         groupCfg.attrs =
             new CircleShapeAttrs(shapeName, size, anchorPoint,
@@ -64,6 +64,5 @@ export default class RectGroup {
         group.addShape(shapeType, <ShapeCfg>groupCfg);
     }
     static ShowShape(isShow:boolean):void{
-
     }
 }
